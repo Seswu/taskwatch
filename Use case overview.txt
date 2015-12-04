@@ -1,0 +1,32 @@
+Opening screen:
+-Select task
+-Menu
+
+On task select;
+*Log time, task
+
+Menu screen:
+-Edit tasks
+-Turn on/off
+
+Task edit selection screen:
+-Select task to edit
+
+Editing task:
+-keyboard pop-up for each field to configure. File?
+
+On/off screen:
+-Button On
+-Button Off
+
+On On/Off select;
+*Log time + 'On'
+*Log time + 'Off'
+
+Possible tasks..
+-Programming X
+-Configuring services for Company Y
+-Developing system Z
+-Pause (intentional de-focus)
+-Waiting (unintended loss of production due to processing and/or third-party)
+-Listening (loss of focus due to costumer or collegue)

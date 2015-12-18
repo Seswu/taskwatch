@@ -1,0 +1,52 @@
+<%= form_for :task, url: tasks_path do |f| %>
+
+<!doctype html>
+<html>
+<head>
+    <title>TaskWatch</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+</head>
+<body>
+    <div data-role="page">
+ 
+        <div data-role="header">
+            <h1>TaskWatch</h1>
+        </div><!-- /header -->
+ 
+        <div role="main" class="ui-content">
+			
+				<p>
+					<%= f.label :name %>
+					<%= f.text_field :name %>
+				</p>
+ 
+				<p>
+					<%= f.label :settings %><br>
+					<%= f.text_area :settings %>
+				</p>
+				<br>
+				<p>
+				
+				</p>
+        </div><!-- /content -->
+ 
+        <div data-role="footer">
+			<table>
+				<tr>
+					<td><a href="#" data-role="button" data-icon="delete">Delete</a></td>
+					<td><a href="#" data-role="button" data-icon="back">Cancel</a></td>
+					<td><a href="#" data-role="button" data-icon="check">Save</a></td>
+					<td><%= f.submit %></td>
+				</tr>
+			</table>
+        </div><!-- /footer -->
+ 
+    </div><!-- /page -->
+</body>
+</html>
+
+<% end %>

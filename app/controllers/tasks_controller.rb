@@ -17,40 +17,32 @@ class TasksController < ApplicationController
 	
 	def create
 		@task = Task.new(task_params)
-		#@task = Task.new(params[:task])
-		@task.save
-		redirect_to tasks_path
-		#if @task.save
-		#	redirect_to @task
-		#else
-		#	render 'new'
-		#end
+		if @task.save
+			#redirect_to @task
+			redirect_to tasks_path
+		else
+			render 'new'
+		end
 	end
 	
 	def update
 		@task = Task.find(params[:id])
-		@task.update(task_params)
-		redirect_to tasks_path
-		#fd = IO.sysopen "errors.log", "w"
-		#ios = IO.new(fd, "w")
-		#ios.puts "File written."
-		#ios.puts params[:id]
-		#@task = Task.find(params[:id])
-		#if @task.update(params[:task])
-		#	redirect_to @task
-		#	ios.puts "Task updated."
-		#else
-		#	render 'edit'
-		#	ios.puts "Task not updated."
-		#end
-		#ios.puts "File closed."
-		#ios.close
+		if @task.update(task_params)
+			redirect_to @task
+			#redirect_to tasks_path
+		else
+			##redirect_to @task
+			render 'edit'
+		end
 	end
 	
 	def destroy
 		@task = Task.find(params[:id])
-		@task.destroy
-		redirect_to tasks_path
+		if @task.destroy
+			redirect_to tasks_path
+		else
+			render 'edit'
+		end
 	end
 	
 	private

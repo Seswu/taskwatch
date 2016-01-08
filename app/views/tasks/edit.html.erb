@@ -1,55 +1,39 @@
-<%= form_for :task, url: task_path(@task), method: :patch do |f| %>
-	
-	<% if @task.errors.any? %>
-		<div id="error_explanation">
-			<h2>
-				<%= pluralize(@task.errors.count, "error") %>:
-			</h2>
-			<ul>
-				<% @task.errors.full_messages.each do |msg| %>
-					<li><%= msg %></li>
-				<% end %>
-			</ul>
-		</div>
-	<% end %>
+<% if @task.errors.any? %>
+	<div id="error_explanation">
+		<h2>
+			<%= pluralize(@task.errors.count, "error") %>:
+		</h2>
+		<ul>
+			<% @task.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
 
-
-<!doctype html>
-<html>
-<head>
-    <title>TaskWatch</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-
-</head>
-<body>
-    <div data-role="page">
- 
-        <div data-role="header">
-            <h1>TaskWatch</h1>
-		</div><!-- /header -->
- 
-        <div role="main" class="ui-content">
-			<p>
-				<%= f.label :name %>
-				<%= f.text_field :name %>
-			</p>
-			<br>
-			<p>
-				<%= f.label :settings %>
-				<%= f.text_area :settings %>
-			</p>
+<div data-role="page" data-dom-cache="false">
+	<div data-role="header">
+		<h1>TaskWatch</h1>
+	</div><!-- /header -->
+				
+	<form method="post" action="<%= task_path(@task) %>">
+		<input type="hidden" name="_method" value="patch"/>
+		<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+		<div data-role="main" class="ui-content">
+			<%= label_tag("task_name", :name) %>
+			<%= text_field(:task, :name) %>
+			<%= label_tag("task_settings", :settings) %>
+			<%= text_area(:task, :settings) %>
+			<!--, :name => 'save', :'data-role' => 'button', :'data-icon' => 'check' -->
 		</div><!-- /content -->
  
-        <div data-role="footer">
-			<a href=<%= tasks_path %> data-role="button" data-icon="back">Back</a>
-			<%= f.submit %>
-        </div><!-- /footer -->
- 
-    </div><!-- /page -->
-</body>
-</html>
-
-<% end %>
+		<div data-role="footer" style="text-align:center;">
+			<div data-role="control-group" data-type="horizontal">
+				<input type="submit" name="commit" value="Save Stuff" data-method="patch"/>
+				<%= link_to 'Delete', task_path(@task), method: :delete, :'data-role' => 'button',  :'data-icon' => 'delete' %>
+				<a href=<%= tasks_path %> data-role="button" data-icon="back">Back</a>
+				<%= submit_tag("Save'm all", :name=>'save', :'data-role'=>'button', :'data-icon'=>'check') %>
+			</div>
+		</div><!-- /footer -->
+	</form>
+</div><!-- /page -->

@@ -1,17 +1,5 @@
 <%= form_for :task, url: tasks_path do |f| %>
-
-<!doctype html>
-<html>
-<head>
-    <title>TaskWatch</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-
-</head>
-<body>
-    <div data-role="page">
+    <div data-role="page" data-dom-cache="false">
  
         <div data-role="header">
             <h1>TaskWatch</h1>
@@ -34,19 +22,12 @@
 				</p>
         </div><!-- /content -->
  
-        <div data-role="footer">
-			<table>
-				<tr>
-					<td><a href="#" data-role="button" data-icon="delete">Delete</a></td>
-					<td><a href="#" data-role="button" data-icon="back">Cancel</a></td>
-					<td><a href="#" data-role="button" data-icon="check">Save</a></td>
-					<td><%= f.submit %></td>
-				</tr>
-			</table>
+        <div data-role="footer" style="text-align:center;">
+			<div data-role="control-group" data-type="horizontal">
+				<a href=<%= tasks_path %> data-role="button" data-icon="back">Back</a>
+				<%= f.submit 'Save', :name => 'save', :'data-role' => 'button', :'data-icon' => 'check' %>
+				<%= f.submit %>
+			</div>
         </div><!-- /footer -->
- 
     </div><!-- /page -->
-</body>
-</html>
-
 <% end %>

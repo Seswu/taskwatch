@@ -1,9 +1,23 @@
-<p>
-  <strong>Title:</strong>
-  <%= @task.name %>
-</p>
+<div data-role="page" data-dom-cache="false">
+	<div data-role="header">
+		<h1>TaskWatch</h1>
+	</div><!-- /header -->
+
+	<div data-role="main" class="ui-content">
+		<div>
+			<%= label_tag("task_name", :name) %>
+			<%= @task.name %>
+		</div>
+		<div>
+			<%= label_tag("task_settings", :settings) %>
+			<%= @task.settings %>
+		</div>
+		<!--, :name => 'save', :'data-role' => 'button', :'data-icon' => 'check' -->
+	</div><!-- /content -->
  
-<p>
-  <strong>Text:</strong>
-  <%= @task.settings %>
-</p>
+	<div data-role="footer" style="text-align:center;">
+		<div data-role="control-group" data-type="horizontal">
+			<a href=<%= tasks_path %> data-role="button" data-icon="back">Back</a>
+		</div>
+	</div><!-- /footer -->
+</div><!-- /page -->

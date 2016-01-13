@@ -8,7 +8,7 @@
             <ul data-role="listview" data-inset="true">
 				<% @tasks.each do |task| %>
 					<li>
-						<a href="#" data-icon="location"><%= task.name %></a>
+						<a href=<%= task_path(task)+"/choice" %> data-icon="location"><%= task.name %></a>
 						<a href=<%= edit_task_path(task) %> data-icon="edit">Edit</a>
 					</li>
 				<% end %>
@@ -19,13 +19,7 @@
         </div><!-- /content -->
  
         <div data-role="footer">
-			<table>
-				<tr>
-					<td>Logging</td>
-					<td><a href="#" data-role="button" data-icon="power">On</a></td>
-					<td><a href="#" data-role="button" data-icon="power">Off</a></td>
-				</tr>
-			</table>
+			<%= link_to 'Stop logging', tasks_stop_path, method: :post, :'data-role' => 'button',  :'data-icon' => 'power' %>
         </div><!-- /footer -->
  
     </div><!-- /page -->

@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151216115633) do
+ActiveRecord::Schema.define(version: 20160111135653) do
+
+  create_table "logs", force: :cascade do |t|
+    t.string   "taskname",   limit: 255
+    t.datetime "start"
+    t.datetime "stop"
+    t.boolean  "active"
+    t.text     "settings"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name",       limit: 255

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'logs/index'
+
   #get 'select/index'
 
   post 'tasks/stop', to: 'tasks#stop', as: 'tasks_stop'

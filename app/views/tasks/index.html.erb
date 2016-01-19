@@ -20,6 +20,7 @@
  
         <div data-role="footer">
 			<%= link_to 'Stop logging', tasks_stop_path, method: :post, :'data-role' => 'button',  :'data-icon' => 'power' %>
+			<%= link_to 'Download as Excel', logs_index_path(:format => :xls) %>
         </div><!-- /footer -->
  
     </div><!-- /page -->

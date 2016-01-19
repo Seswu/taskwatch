@@ -1,0 +1,56 @@
+require 'yaml'
+
+__filename = "Tasklog.xls"
+
+logdata = xls.create_worksheet
+logdata.name = 'Log data'
+
+logdata[1, 0] = "Task Log:"
+logdata.row(3).concat ["Name", "Start", "Stop"]
+title_settings = []
+column_widths = [LogsHelper::Maxlength.new, LogsHelper::Maxlength.new, LogsHelper::Maxlength.new]
+
+@logs.each_with_index do |p, i|
+  logdata.update_row i+4, p.taskname, p.start, p.stop
+  column_widths[0].choose_maximum(p.taskname)
+  column_widths[1].choose_maximum(p.start.to_s[0..18])
+  column_widths[2].choose_maximum(p.stop.to_s[0..18])
+  
+  settings = begin
+    YAML.load(p.settings)
+  rescue ArgumentError => e
+    settings = {}
+  end
+  if settings.respond_to?(:to_str)
+    settings = {}
+  end
+
+  settings.each_with_index do |key_value,j|
+    key = key_value[0].to_s
+    value = key_value[1].to_s
+    if !title_settings.include?( key )
+      title_settings << key
+      column_widths << LogsHelper::Maxlength.new
+      column_widths.last.choose_maximum( key )
+    end
+    category_index = title_settings.find_index( key ) + 3
+    unless logdata.row(3)[category_index]
+      logdata.row(3)[category_index] = key
+    end
+    logdata.row(i+4)[category_index] = value
+    column_widths[category_index].choose_maximum(value)
+  end
+end
+
+logdata.row(1).height = 25
+title_format = Spreadsheet::Format.new(:color => :black, :weight => :bold, :size => 18)
+logdata.row(1).set_format(0, title_format)
+
+bold = Spreadsheet::Format.new(:weight => :bold)
+logdata.row(3).default_format = bold
+
+column_widths.each_with_index do |cw, i|
+  logdata.column(i).width = [ 40, cw.return_max + 2].min
+  #logdata.row(34)[i] = cw.return_max
+  #logdata.row(35)[i] = cw.return_max_str
+end

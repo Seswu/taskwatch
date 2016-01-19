@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+
   def index
     @tasks = Task.all
   end
@@ -62,7 +63,6 @@ class TasksController < ApplicationController
     # Stay at index page
     redirect_to tasks_path
   end
-
 
   private
     def task_params

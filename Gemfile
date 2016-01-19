@@ -36,3 +36,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Ekuseru for spreadsheet view and download
 gem 'ekuseru'
+
+# Specifically requesting responders in order to get the respond_to feature for the logs_controller
+gem 'responders', '~> 2.0'

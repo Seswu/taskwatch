@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   #get 'select/index'
 
   post 'tasks/stop', to: 'tasks#stop', as: 'tasks_stop'
+  post 'logs/destroy_all', to: 'logs#destroy_all', as: 'logs_destroy_all'
 
   root 'tasks#index'
 

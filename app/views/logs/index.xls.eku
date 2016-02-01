@@ -8,7 +8,7 @@ logdata.name = 'Log data'
 logdata[1, 0] = "Task Log:"
 logdata.row(3).concat ["Name", "Start", "Stop"]
 title_settings = []
-column_widths = [LogsHelper::Maxlength.new, LogsHelper::Maxlength.new, LogsHelper::Maxlength.new]
+column_widths = [LogsHelper::Maxlength.new("Name"), LogsHelper::Maxlength.new("Start"), LogsHelper::Maxlength.new("Stop")]
 
 @logs.each_with_index do |p, i|
   logdata.update_row i+4, p.taskname, p.start, p.stop

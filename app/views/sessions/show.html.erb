@@ -1,13 +1,13 @@
 <div data-role="page" data-dom-cache="false">
   
   <div data-role='header'>
-    <h1>New session</h1>
+    <h1>Show session</h1>
   </div><!-- /header -->
   
   <div data-role='body'>
     <%= "Session number is: " + @session.token_id %>
     <br>
-    Resulting  <%= link_to "Link", session_path(@session.token_id) %>
+    Back to  <%= link_to "Index", sessions_path %>
   </div><!-- /body -->
 
 </div><!-- /page -->

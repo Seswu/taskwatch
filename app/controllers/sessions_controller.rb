@@ -4,6 +4,12 @@ class SessionsController < ApplicationController
   end
   
   def new
-    @Session = Session.new
+    @session = Session.new
+    @session.save
   end
+  
+  def show
+    @session = Session.find_by token_id: params[:id]
+  end
+
 end

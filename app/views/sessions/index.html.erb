@@ -1,0 +1,13 @@
+<% require 'securerandom' %>
+
+<div data-role="page" data-dom-cache="false">
+  
+  <div data-role='header'>
+    <h1>Session choice</h1>
+  </div><!-- /header -->
+  
+  <div data-role='body'>
+    <%= SecureRandom.urlsafe_base64(3) %>
+  </div><!-- /body -->
+
+</div><!-- /page -->

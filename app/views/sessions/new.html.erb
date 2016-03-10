@@ -1,0 +1,12 @@
+<div data-role="page" data-dom-cache="false">
+  
+  <div data-role='header'>
+    <h1>New session</h1>
+  </div><!-- /header -->
+  
+  <div data-role='body'>
+	<% @Session.set_pub_token %>
+    <%= "Session number is: " + @Session.get_token %>
+  </div><!-- /body -->
+
+</div><!-- /page -->

@@ -10,17 +10,20 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
+    @session = Session.find_by token_id: params[:session_id]
   end
 
   def edit
+    @session = Session.find_by token_id: params[:session_id]
     @task = Task.find(params[:id])
   end
 
   def create
     @task = Task.new(task_params)
+    @session = Session.find_by token_id: params[:session_id]
     if @task.save
       #redirect_to @task
-      redirect_to tasks_path
+      redirect_to session_path(@session.token_id)
     else
       render 'new'
     end
@@ -28,8 +31,9 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
+    @session = Session.find_by token_id: params[:session_id]
     if @task.update(task_params)
-      redirect_to @task
+      redirect_to session_path(@session.token_id)
       #redirect_to tasks_path
     else
       ##redirect_to @task
@@ -39,29 +43,34 @@ class TasksController < ApplicationController
 
   def destroy
     @task = Task.find(params[:id])
+    @session = Session.find_by token_id: params[:session_id]
     if @task.destroy
-      redirect_to tasks_path
+      redirect_to session_path(@session.token_id)
     else
       render 'edit'
     end
   end
 
   def choice
+    @task = Task.find(params[:id])
+    @session = Session.find_by token_id: params[:session_id]
+
     # Stop running task(s)
     stop_tasks
 
     # Start the new task
-    @task = Task.find(params[:id])
     Log.create(taskname: @task.name, start: Time.now, stop: nil, active: true, settings: @task.settings)
-    redirect_to tasks_path
+    redirect_to session_path(@session.token_id)
   end
 
   def stop
+    @session = Session.find_by token_id: params[:session_id]
+
     # Stop running task(s)
     stop_tasks
 
     # Stay at index page
-    redirect_to tasks_path
+    redirect_to session_path(@session.token_id)
   end
 
   private

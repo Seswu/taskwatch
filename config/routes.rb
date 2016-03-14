@@ -1,18 +1,17 @@
 Rails.application.routes.draw do
-  get 'logs/index'
-
-  #get 'select/index'
-
-  post 'tasks/stop', to: 'tasks#stop', as: 'tasks_stop'
-  post 'logs/destroy_all', to: 'logs#destroy_all', as: 'logs_destroy_all'
 
   root 'sessions#index'
 
-  resources :sessions
+  resources :sessions do
 
-  resources :tasks do
-    member do
-    get 'choice'
+    get 'logs/index'
+    post 'tasks/stop', to: 'tasks#stop', as: 'tasks_stop'
+    post 'logs/destroy_all', to: 'logs#destroy_all', as: 'logs_destroy_all'
+
+    resources :tasks do
+      member do
+        get 'choice'
+      end
     end
   end
 

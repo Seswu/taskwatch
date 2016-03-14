@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+
   def index
     if params["session_token"]
       redirect_to session_path(params["session_token"])

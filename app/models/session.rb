@@ -1,6 +1,8 @@
 require 'securerandom'
 
 class Session < ActiveRecord::Base
+  has_many :tasks
+  has_many :logs
   before_create :set_token
 
   def get_token

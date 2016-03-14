@@ -16,7 +16,7 @@
     <h1>TaskWatch</h1>
   </div><!-- /header -->
 
-  <form method="post" action="<%= task_path(@task) %>">
+  <form method="post" action="<%= session_task_path(@session.token_id,@task) %>">
     <input type="hidden" name="_method" value="patch"/>
     <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 
@@ -26,8 +26,8 @@
 
     <div data-role="footer" style="text-align:center;">
       <div data-role="control-group" data-type="horizontal">
-        <%= link_to 'Delete', task_path(@task), method: :delete, :'data-role' => 'button',  :'data-icon' => 'delete' %>
-        <a href=<%= tasks_path %> data-role="button" data-icon="back">Back</a>
+        <%= link_to 'Delete', session_task_path(@session.token_id,@task), method: :delete, :'data-role' => 'button',  :'data-icon' => 'delete' %>
+        <a href=<%= session_path(@session.token_id) %> data-role="button" data-icon="back">Back</a>
         <%= submit_tag("Save", :name=>'save', :'data-role'=>'button', :'data-icon'=>'check') %>
       </div>
     </div><!-- /footer -->

@@ -7,9 +7,9 @@
   </div><!-- /header -->
   
   <div data-role='main'>
-	<div data-role="control-group" data-type="horizontal">
+	<div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
       <form method='get' action="<%= sessions_path %>">
-        <label>Join earlier session:</label>
+        <label>Load earlier session:</label>
         <input type="text" name="session_token">
         <%= submit_tag("Go", :name=>'load', :'data-role'=>'button', :'data-icon'=>'arrow-r') %>
       </form>
@@ -17,7 +17,7 @@
   </div><!-- /main -->
 
   <div data-role='footer' style="text-align:center;">
-    <a href=<%= new_session_path %> data-role="button" data-icon="action">Create new</a>
+    <a href=<%= new_session_path %> data-role="button" data-icon="location">Create new</a>
   </div>
 
 </div><!-- /page -->

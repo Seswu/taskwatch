@@ -16,7 +16,7 @@
 		<h1>TaskWatch</h1>
 	</div><!-- /header -->
 				
-	<form method="post" action="<%= tasks_path %>">
+	<form method="post" action="<%= session_tasks_path(@session.token_id) %>">
 		<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 		<div data-role="main" class="ui-content">
 			<%= render partial: "form" %>
@@ -24,7 +24,7 @@
  
 		<div data-role="footer" style="text-align:center;">
 			<div data-role="control-group" data-type="horizontal">
-				<a href=<%= tasks_path %> data-role="button" data-icon="back">Back</a>
+				<a href=<%= session_tasks_path(@session.token_id) %> data-role="button" data-icon="back">Back</a>
 				<%= submit_tag("Save", :name=>'save', :'data-role'=>'button', :'data-icon'=>'check') %>
 			</div>
 		</div><!-- /footer -->

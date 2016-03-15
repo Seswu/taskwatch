@@ -22,7 +22,7 @@
     <%= link_to "Index", sessions_path %>
     <%= link_to 'Stop logging', session_tasks_stop_path(@session.token_id), method: :post, :'data-role' => 'button',  :'data-icon' => 'power' %>
     <%= link_to 'Delete log', session_logs_destroy_all_path(@session.token_id), method: :post, :'data-role' => 'button',  :'data-icon' => 'delete' %>
-    <%= link_to 'Download as Excel', session_logs_index_path(@session.token_id, :format => :xls) %>
+    <%= link_to 'Download as Excel', session_logs_index_path(@session.token_id, :format => :xls), :'data-role' => 'button', :'data-icon' => 'action', :'data-ajax' => 'false' %>
   </div><!-- /footer -->
 
 </div><!-- /page -->

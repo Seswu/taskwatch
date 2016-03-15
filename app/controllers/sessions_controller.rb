@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
   def new
     @session = Session.new
     @session.save
+    redirect_to session_path(@session.token_id)
   end
   
   def show

@@ -1,7 +1,7 @@
 <div data-role="page" data-dom-cache="false">
   
   <div data-role='header'>
-    <h1>Session: <%= @session.token_id %></h1>
+    <h1>Session: <%= link_to @session.token_id, session_path(@session.token_id) %></h1>
   </div><!-- /header -->
   
   <div role="main" class="ui-content">

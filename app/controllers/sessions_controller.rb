@@ -13,8 +13,9 @@ class SessionsController < ApplicationController
   end
   
   def show
-    @tasks = Task.all
     @session = Session.find_by token_id: params[:id]
+    @tasks = @session.tasks
+    #@tasks = Task.all
   end
 
 end

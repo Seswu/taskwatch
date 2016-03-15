@@ -21,8 +21,8 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     @session = Session.find_by token_id: params[:session_id]
+    @task.session = @session
     if @task.save
-      #redirect_to @task
       redirect_to session_path(@session.token_id)
     else
       render 'new'
@@ -59,7 +59,7 @@ class TasksController < ApplicationController
     stop_tasks
 
     # Start the new task
-    Log.create(taskname: @task.name, start: Time.now, stop: nil, active: true, settings: @task.settings)
+    Log.create(taskname: @task.name, start: Time.now, stop: nil, active: true, settings: @task.settings, session_id: @session.id)
     redirect_to session_path(@session.token_id)
   end
 
@@ -81,7 +81,13 @@ class TasksController < ApplicationController
     def stop_tasks
       # Stop the currently running task, if there is one.
       # (actually stops all running tasks, but only one ought to be running at a given time)
-      active_logs = Log.where(active: true)
+      # ..and now, since multiple sessions are being implemented, more than one task can
+      # definitely be running.
+      # So we're limiting task-stopping by session.
+
+      @session = Session.find_by token_id: params[:session_id]
+      active_logs = @session.logs.where(active: true)
+      #active_logs = Log.where(active: true)
       now = Time.now
       active_logs.each do |log|
         log.active = false

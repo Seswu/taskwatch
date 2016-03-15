@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160309113919) do
+ActiveRecord::Schema.define(version: 20160314171532) do
 
   create_table "logs", force: :cascade do |t|
     t.string   "taskname",   limit: 255
@@ -21,7 +21,10 @@ ActiveRecord::Schema.define(version: 20160309113919) do
     t.text     "settings"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.integer  "session_id"
   end
+
+  add_index "logs", ["session_id"], name: "index_logs_on_session_id"
 
   create_table "sessions", force: :cascade do |t|
     t.string   "token_id",   limit: 255
@@ -34,6 +37,9 @@ ActiveRecord::Schema.define(version: 20160309113919) do
     t.text     "settings"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.integer  "session_id"
   end
+
+  add_index "tasks", ["session_id"], name: "index_tasks_on_session_id"
 
 end

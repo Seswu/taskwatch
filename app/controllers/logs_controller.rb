@@ -3,13 +3,15 @@ class LogsController < ApplicationController
   
   def index
     @session = Session.find_by token_id: params[:session_id]
-    @logs = Log.all
+    @logs = @session.logs
+    #@logs = Log.all
     respond_with @logs
   end
   
   def destroy_all
     @session = Session.find_by token_id: params[:session_id]
-    @logs = Log.all
+    @logs = @session.logs
+    #@logs = Log.all
     @logs.each do |l|
       l.destroy
     end

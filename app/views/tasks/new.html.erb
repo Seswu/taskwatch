@@ -24,7 +24,7 @@
  
 		<div data-role="footer" style="text-align:center;">
 			<div data-role="control-group" data-type="horizontal">
-				<a href=<%= session_tasks_path(@session.token_id) %> data-role="button" data-icon="back">Back</a>
+				<a href=<%= session_path(@session.token_id) %> data-role="button" data-icon="back">Back</a>
 				<%= submit_tag("Save", :name=>'save', :'data-role'=>'button', :'data-icon'=>'check') %>
 			</div>
 		</div><!-- /footer -->

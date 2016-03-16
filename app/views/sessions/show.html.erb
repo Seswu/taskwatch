@@ -1,4 +1,4 @@
-<div data-role="page" data-dom-cache="false">
+<div data-role="page" data-dom-cache="false" data-url=<%= session_path(@session.token_id) %>>
   
   <div data-role='header'>
     <h1>Session: <%= link_to @session.token_id, session_path(@session.token_id) %></h1>

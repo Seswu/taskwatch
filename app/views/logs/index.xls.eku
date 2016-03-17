@@ -6,18 +6,27 @@ logdata = xls.create_worksheet
 logdata.name = 'Log data'
 
 #xls.add_format Spreadsheet::Format.new(:number_format => 'DD.MM.YYYY hh:mm:ss')
-# Documentation advises to specify date format in order for it to be read in excel.
+# Documentation for Spreadsheet gem advises to specify date format in order for it to be read in excel.
 # However, libreoffice (excel untested) seems to read the date just fine as-is.
 
 logdata[1, 0] = "Task Log:"
-logdata.row(3).concat ["Name", "Start", "Stop"]
+headers = ["Name", "Start", "Stop", "Time"]
+logdata.row(3).concat headers
 title_settings = []
-column_widths = [LogsHelper::Maxlength.new("Name"), LogsHelper::Maxlength.new("Start"), LogsHelper::Maxlength.new("Stop")]
+column_widths = []
+
+#column_widths = [LogsHelper::Maxlength.new("Name"), LogsHelper::Maxlength.new("Start"), LogsHelper::Maxlength.new("Stop")]
+headers.each do |header|
+  column_widths << LogsHelper::Maxlength.new(header)
+end
 
 @logs.each_with_index do |p, i|
+  if not p.stop.is_a?(Time)    # Case of a started log which isn't stopped, ie. no stop-time.
+    break
+  end
 
-  # The Time.at(x.to_i) construction is to convert the database's utc time format to local format.
-  logdata.update_row i+4, p.taskname, Time.at(p.start.to_i), Time.at(p.stop.to_i)
+  # The "Time.at(x.to_i)" construction is to convert the database's utc time format to local format.
+  logdata.update_row i+4, p.taskname, Time.at(p.start.to_i), Time.at(p.stop.to_i), ((p.stop-p.start)/60).round
 
   column_widths[0].choose_maximum(p.taskname)
   column_widths[1].choose_maximum(p.start.to_s[0..18])
@@ -40,7 +49,7 @@ column_widths = [LogsHelper::Maxlength.new("Name"), LogsHelper::Maxlength.new("S
       column_widths << LogsHelper::Maxlength.new
       column_widths.last.choose_maximum( key )
     end
-    category_index = title_settings.find_index( key ) + 3
+    category_index = title_settings.find_index( key ) + headers.length
     unless logdata.row(3)[category_index]
       logdata.row(3)[category_index] = key
     end

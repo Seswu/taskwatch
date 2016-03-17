@@ -5,13 +5,20 @@ __filename = "Tasklog.xls"
 logdata = xls.create_worksheet
 logdata.name = 'Log data'
 
+#xls.add_format Spreadsheet::Format.new(:number_format => 'DD.MM.YYYY hh:mm:ss')
+# Documentation advises to specify date format in order for it to be read in excel.
+# However, libreoffice (excel untested) seems to read the date just fine as-is.
+
 logdata[1, 0] = "Task Log:"
 logdata.row(3).concat ["Name", "Start", "Stop"]
 title_settings = []
 column_widths = [LogsHelper::Maxlength.new("Name"), LogsHelper::Maxlength.new("Start"), LogsHelper::Maxlength.new("Stop")]
 
 @logs.each_with_index do |p, i|
-  logdata.update_row i+4, p.taskname, p.start, p.stop
+
+  # The Time.at(x.to_i) construction is to convert the database's utc time format to local format.
+  logdata.update_row i+4, p.taskname, Time.at(p.start.to_i), Time.at(p.stop.to_i)
+
   column_widths[0].choose_maximum(p.taskname)
   column_widths[1].choose_maximum(p.start.to_s[0..18])
   column_widths[2].choose_maximum(p.stop.to_s[0..18])

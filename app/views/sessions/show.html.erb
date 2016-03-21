@@ -8,7 +8,7 @@
     <ul data-role="listview" data-inset="true">
 	  <% @tasks.each do |task| %>
 	    <li>
-          <a href=<%= session_task_path(@session.token_id,task)+"/choice" %> data-icon="location"><%= task.name %></a>
+          <a href=<%= session_task_path(@session.token_id,task)+"/choice" %> data-icon="location"><%= task.name %><% if task.activated %><span class="ui-li-count"><%= Time.at(task.activated.to_i).strftime("%k:%M") %></span><% end %></a>
 		  <a href=<%= edit_session_task_path(@session.token_id,task) %> data-icon="edit">Edit</a>
         </li>
       <% end %>

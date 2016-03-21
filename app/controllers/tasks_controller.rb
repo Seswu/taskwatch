@@ -61,6 +61,10 @@ class TasksController < ApplicationController
     # Start the new task
     Log.create(taskname: @task.name, start: Time.now, stop: nil, active: true, settings: @task.settings, session_id: @session.id)
     redirect_to session_path(@session.token_id)
+    
+    # Mark current task as actively logged, with start-time noted.
+    @task.activated = Time.now
+    @task.save
   end
 
   def stop
@@ -93,6 +97,13 @@ class TasksController < ApplicationController
         log.active = false
         log.stop = now
         log.save
+      end
+      
+      # Mark all (presumably one) currently active tasks as inactive
+      active_tasks = @session.tasks.where.not(activated: nil)
+      active_tasks.each do |task|
+        task.activated = nil
+        task.save
       end
     end
 end

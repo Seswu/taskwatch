@@ -1,15 +1,15 @@
 <div data-role="page" data-dom-cache="false" data-url=<%= session_path(@session.token_id) %>>
-  
+
   <div data-role='header'>
     <h1>Session: <%= link_to @session.token_id, session_path(@session.token_id) %></h1>
   </div><!-- /header -->
-  
+
   <div role="main" class="ui-content">
     <ul data-role="listview" data-inset="true">
 	  <% @tasks.each do |task| %>
 	    <li>
-          <a href=<%= session_task_path(@session.token_id,task)+"/choice" %> data-icon="location"><%= task.name %><% if task.activated %><span class="ui-li-count"><%= Time.at(task.activated.to_i).strftime("%k:%M") %></span><% end %></a>
-		  <a href=<%= edit_session_task_path(@session.token_id,task) %> data-icon="edit">Edit</a>
+          <a href=<%= new_log_session_task_path(@session.token_id, task) %> data-icon="location" data-rel="dialog"><%= task.name %><% if task.activated %><span class="ui-li-count"><%= Time.at(task.activated.to_i).strftime("%k:%M") %></span><% end %></a>
+		  <a href=<%= edit_session_task_path(@session.token_id, task) %> data-icon="edit" data-rel="dialog">Edit</a>
         </li>
       <% end %>
       <li data-icon="location">
@@ -22,7 +22,7 @@
     <%= link_to "Index", sessions_path %>
     <%= link_to 'Stop logging', session_tasks_stop_path(@session.token_id), method: :post, :'data-role' => 'button',  :'data-icon' => 'power' %>
     <%= link_to 'Delete log', session_logs_destroy_all_path(@session.token_id), method: :post, :'data-role' => 'button',  :'data-icon' => 'delete' %>
-    <%= link_to 'Download as Excel', session_logs_index_path(@session.token_id, :format => :xls), :'data-role' => 'button', :'data-icon' => 'action', :'data-ajax' => 'false' %>
+    <%= link_to 'Download as Excel', session_logs_path(@session.token_id, :format => :xls), :'data-role' => 'button', :'data-icon' => 'action', :'data-ajax' => 'false' %>
   </div><!-- /footer -->
 
 </div><!-- /page -->

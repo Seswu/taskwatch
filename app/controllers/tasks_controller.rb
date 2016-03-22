@@ -59,12 +59,21 @@ class TasksController < ApplicationController
     stop_tasks
 
     # Start the new task
-    Log.create(taskname: @task.name, start: Time.now, stop: nil, active: true, settings: @task.settings, session_id: @session.id)
-    redirect_to session_path(@session.token_id)
+    Log.create(taskname: @task.name,
+               start: Time.now,
+               stop: nil,
+               active: true,
+               settings: "Description: " + params[:description] + "\n" +
+                         "Invoiceable: " + (params[:invoiceable] ? "yes" : "no") + "\n" + 
+                         @task.settings,
+               session_id: @session.id)
     
     # Mark current task as actively logged, with start-time noted.
     @task.activated = Time.now
     @task.save
+
+    # Reload page.
+    redirect_to session_path(@session.token_id)
   end
 
   def stop

@@ -4,15 +4,19 @@ Rails.application.routes.draw do
 
   resources :sessions do
 
-    get 'logs/index'
-    post 'tasks/stop', to: 'tasks#stop', as: 'tasks_stop'
-    post 'logs/destroy_all', to: 'logs#destroy_all', as: 'logs_destroy_all'
+    #get 'logs/index'
 
+    post 'tasks/stop', to: 'tasks#stop', as: 'tasks_stop'
     resources :tasks do
       member do
-        get 'choice'
+        post 'choice'
+        get 'logs/new', to: 'logs#new', as: 'new_log'
       end
     end
+
+    post 'logs/destroy_all', to: 'logs#destroy_all', as: 'logs_destroy_all'
+    resources :logs
+
   end
 
 end

@@ -1,0 +1,26 @@
+<div data-role="page" data-dom-cache="false">
+
+	<div data-role="header">
+		<h1>TaskWatch</h1>
+	</div><!-- /header -->
+
+	<form method="post" action="<%= session_task_path(@session.token_id,@task)+"/choice" %>">
+		<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+		<div data-role="main" class="ui-content">
+          <%= label_tag 'description' %>
+		  <%= text_field_tag 'description' %>
+		</div><!-- /content -->
+		<label>
+          <input name="invoiceable" type="checkbox">Invoiceable
+        </label>
+
+		<div data-role="footer" style="text-align:center;">
+			<div data-role="control-group" data-type="horizontal">
+				<a href=<%= session_path(@session.token_id) %> data-role="button" data-icon="back">Back</a>
+				<%= submit_tag("Start task", :name=>'start', :'data-role'=>'button', :'data-icon'=>'check') %>
+			</div>
+		</div><!-- /footer -->
+	</form>
+
+</div><!-- /page -->

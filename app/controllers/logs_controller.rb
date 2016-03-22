@@ -7,7 +7,12 @@ class LogsController < ApplicationController
     #@logs = Log.all
     respond_with @logs
   end
-  
+
+  def new
+    @session = Session.find_by token_id: params[:session_id]
+    @task = Task.find(params[:id])
+  end
+
   def destroy_all
     @session = Session.find_by token_id: params[:session_id]
     @logs = @session.logs

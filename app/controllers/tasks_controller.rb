@@ -65,7 +65,7 @@ class TasksController < ApplicationController
                active: true,
                settings: "Description: " + params[:description] + "\n" +
                          "Invoiceable: " + (params[:invoiceable] ? "yes" : "no") + "\n" + 
-                         @task.settings,
+                         ApplicationHelper.sanitize_yaml(@task.settings),
                session_id: @session.id)
     
     # Mark current task as actively logged, with start-time noted.

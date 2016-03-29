@@ -12,12 +12,13 @@
 		  <%= text_field_tag 'description' %>
 		</div><!-- /content -->
 		<label>
-          <input name="invoiceable" type="checkbox">Invoiceable
+          <input name="invoiceable" type="checkbox">Invoiceable</input>
         </label>
 
 		<div data-role="footer" style="text-align:center;">
 			<div data-role="control-group" data-type="horizontal">
 				<a href=<%= session_path(@session.token_id) %> data-role="button" data-icon="back">Back</a>
+				<%= link_to "Back2Basics", session_path(@session.token_id), :'data-role'=>'button', :'data-icon'=>'back' %>
 				<%= submit_tag("Start task", :name=>'start', :'data-role'=>'button', :'data-icon'=>'check') %>
 			</div>
 		</div><!-- /footer -->

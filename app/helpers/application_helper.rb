@@ -12,4 +12,8 @@ module ApplicationHelper
     end
     return sanitized_code
   end
+
+  def self.errormsg(error)
+    puts error
+  end
 end

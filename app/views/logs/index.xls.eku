@@ -31,10 +31,13 @@ end
   column_widths[0].choose_maximum(p.taskname)
   column_widths[1].choose_maximum(p.start.to_s[0..18])
   column_widths[2].choose_maximum(p.stop.to_s[0..18])
-  
+
   settings = begin
     YAML.load(p.settings)
-  rescue ArgumentError => e
+  rescue Exception => e
+    ApplicationHelper.errormsg("YAML: " + e.message + "\n" +
+                               "Log id: " + p.id.to_s + "\n" +
+                               "Settings: " + p.settings)
     settings = {}
   end
   if settings.respond_to?(:to_str)

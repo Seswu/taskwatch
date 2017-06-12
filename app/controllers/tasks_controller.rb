@@ -63,7 +63,7 @@ class TasksController < ApplicationController
                start: Time.now,
                stop: nil,
                active: true,
-               settings: "Description: " + params[:description] + "\n" +
+               settings: "Description: '" + params[:description] + "'\n" +
                          "Invoiceable: " + (params[:invoiceable] ? "yes" : "no") + "\n" + 
                          ApplicationHelper.sanitize_yaml(@task.settings),
                session_id: @session.id)
